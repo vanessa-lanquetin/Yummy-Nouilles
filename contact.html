@@ -1,0 +1,129 @@
+<!-- Déclaration du type de document HTML -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/17b826000a.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <!-- Définition du style pour la carte -->
+    <style>
+      #map {
+        height: 580px;
+        width: 616px;
+      }
+    </style>
+    <!-- Titre de la page -->
+    <title>Contact</title>
+  </head>
+  <body>
+    <!-- En-tête de la page -->
+    <header>
+      <!-- Lien vers la page d'accueil -->
+      <a href="accueil.html">
+        <img src="./images/LogoS.png" alt="" />
+      </a>
+      <!-- Menu de navigation -->
+      <nav>
+        <a href="accueil.html">Accueil</a>
+        <a href="menu.html">Menu</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+    <section id="banniere">
+      <p class="highlight">Commandez maintenant !</p>
+      <button class="title1">Click & Collect</button>
+    </section>
+    <div class="containerContact">
+      <section id="adresses">
+        <h2 class="title1">Nos adresses</h2>
+        <div id="container-articles">
+          <article>
+            <img src="./images/accueil/facade1.png" alt="" />
+            <h3 class="highlight">Yummy Noodle</h3>
+            <p class="body">
+              185 rue de Lancry <br />
+              75010 Paris
+            </p>
+          </article>
+          <article>
+            <img src="./images/accueil/facade2.png" alt="" />
+            <h3 class="highlight">Yummy Noodle</h3>
+            <p class="body">
+              185 rue de Lancry <br />
+              75010 Paris
+            </p>
+          </article>
+          <article>
+            <img src="./images/accueil/facade3.png" alt="" />
+            <h3 class="highlight">Yummy Noodle</h3>
+            <p class="body">
+              185 rue de Lancry <br />
+              75010 Paris
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Conteneur pour afficher la carte -->
+      <div id="containerMap">
+      <div id="map"></div>        
+      </div>
+
+    </div>
+        <section id="contact">
+        <h2 class="title1">Contactez-nous</h2>
+        <p class="body">
+          Vous souhaitez nous poser une question, nous faire un feeback, ou tout simplement nous contacter ? <br>
+          Ecrivez-nous à <span><a href="mailto:yummy@noodles.fr">yummy@noodles.fr</a></span> ou appelez nous au <span><a href="tel:0113862342"> 01 13 86 23 42</a></span>
+        </p>
+      </section>
+    </main>
+    <footer>
+      <i class="fab fa-instagram-square"></i>
+      <i class="fab fa-facebook-square"></i>
+      <i class="fas fa-map-marker-alt"></i>
+    </footer>
+  </body>
+  <!-- Inclusion du script de Leaflet -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""
+  ></script>
+
+  <!-- Script JavaScript pour afficher la carte et les marqueurs -->
+  <script>
+    // Création d'une instance de la carte avec Leaflet
+    const map = L.map("map").setView([48.8650042, 2.3545866], 13);
+
+    // Ajout d'une couche de tuiles OpenStreetMap à la carte
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    // Tableau de restaurants avec leurs coordonnées géographiques
+    [
+      { label: "Restaurant 1", coordinates: [48.8706784, 2.3613014] },
+      { label: "Restaurant 2", coordinates: [48.8541245, 2.328278] },
+      { label: "Restaurant 3", coordinates: [48.8650042, 2.3545866] },
+    ].forEach((restaurant) => {
+      // Ajout d'un marqueur pour chaque restaurant sur la carte
+      const marker = L.marker(restaurant.coordinates).addTo(map);
+      // Ajout d'une fenêtre contextuelle (popup) pour afficher le label du restaurant
+      marker.bindPopup(`Je suis ${restaurant.label}`).openPopup();
+    });
+  </script>
+</html>

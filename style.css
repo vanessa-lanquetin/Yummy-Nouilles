@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+  margin: 0;
+  background-color: #f3f3f3;
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+  font-size: 2.7em;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+h2 {
+  width: fit-content;
+  position: relative;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+h2:before {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  top: 30px;
+  background-color: #d2483d;
+  transition: 300ms;
+}
+
+
+.body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.highlight {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.title1 {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+header {
+  padding: 1% 0 2% 3%;
+  display: flex;
+  align-items: center;
+}
+nav {
+  margin-left: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+nav a {
+  color: #000;
+  text-transform: uppercase;
+  position: relative;
+}
+
+nav a:hover:before,
+nav a:active:before {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  top: 30px;
+  background-color: #d2483d;
+  transition: 300ms;
+}
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#presentation {
+  margin-top: 80px;
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+#presentation_left {
+  padding-top: 20px;
+}
+
+#presentation_text {
+  margin-bottom: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.text_red {
+  color: #d2483d;
+}
+
+button {
+  color: #fff;
+  font-size: 1.3rem;
+  border: none;
+  background-color: #000;
+  text-transform: uppercase;
+  padding: 10px 30px;
+}
+
+button:hover {
+  background-color: #424242;
+}
+
+#adresses {
+  margin: 50px auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#container-articles {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 70px;
+}
+
+#container-articles p {
+  margin-top: 0px;
+}
+
+#container-articles h3 {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+#banniere {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #d2483d;
+  padding: 5% 0;
+}
+
+#banniere p {
+  color: #fff;
+  font-size: 1.5em;
+}
+
+#savoir {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+}
+
+#reseaux {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 70px;
+  margin-bottom: 70px;
+}
+
+#contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 100px;
+}
+
+#contact a {
+  color: black;
+  font-weight: 700;
+}
+
+footer {
+  padding: 80px 50px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: right;
+  background-color: #000;
+}
+
+footer i {
+  font-size: 30px;
+  color: #fff;
+}
+
+/* menu */
+.containerMenu{
+  width: 80%;
+  margin: auto;
+}
+
+.menu img {
+  max-width: 200px;
+  margin-bottom: 20px;
+}
+
+.menu{
+  margin-top: 30px;
+  padding: 50px 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.menu section{
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+/*contact */
+.containerContact{
+  display: flex;
+  justify-content: space-between;
+}
+
+.containerContact #container-articles{
+  flex-direction: column;
+}
+
+.containerMap{
+  width: 50%;
+}

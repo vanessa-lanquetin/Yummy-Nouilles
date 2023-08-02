@@ -30,7 +30,6 @@ h2:before {
   transition: 300ms;
 }
 
-
 .body {
   font-family: 'Montserrat', sans-serif;
 }
@@ -82,7 +81,7 @@ main {
   align-items: center;
 }
 #presentation {
-  margin-top: 80px;
+  margin-top: 10px;
   display: flex;
   gap: 50px;
   flex-wrap: wrap;
@@ -107,13 +106,15 @@ button {
   background-color: #000;
   text-transform: uppercase;
   padding: 10px 30px;
+  cursor: pointer;
 }
 
 button:hover {
   background-color: #424242;
 }
 
-#addresses, #home-adresses {
+#adresses,
+#home-adresses {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -124,8 +125,23 @@ button:hover {
   width: 50%;
 }
 #home-adresses {
-  margin: 50px auto;
+  margin: 100px auto;
   width: 100%;
+}
+
+#home-adresses #container-articles article h3,
+#home-adresses #container-articles article .body {
+  transition: 300ms ease-in-out;
+}
+
+#home-adresses #container-articles article:hover {
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.096) 0px 3px 8px;
+}
+
+#home-adresses #container-articles article:hover h3,
+#home-adresses #container-articles article:hover .body {
+  padding-left: 10px;
 }
 
 #container-articles {
@@ -135,6 +151,7 @@ button:hover {
   align-items: center;
   flex-wrap: wrap;
   gap: 70px;
+  cursor: pointer;
 }
 
 #container-articles p {
@@ -194,6 +211,7 @@ button:hover {
   align-items: center;
   flex-direction: column;
   margin-bottom: 100px;
+  text-align: center;
 }
 
 #contact a {
@@ -213,10 +231,11 @@ footer {
 footer i {
   font-size: 30px;
   color: #fff;
+  cursor: pointer;
 }
 
 /* menu */
-.containerMenu{
+.containerMenu {
   width: 80%;
   margin: auto;
 }
@@ -226,7 +245,7 @@ footer i {
   margin-bottom: 20px;
 }
 
-.menu{
+.menu {
   margin-top: 30px;
   padding: 50px 0;
   background-color: #fff;
@@ -237,25 +256,83 @@ footer i {
   text-align: center;
 }
 
-.menu section{
-      display: flex;
-    flex-direction: column;
+.menu section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/*contact */
+.containerContact {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.containerContact #container-articles {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.containerMap {
+  width: 50%;
+}
+
+@media screen and (max-width: 830px) {
+  header{
+    padding-top: 2%;
+  }
+  header img{
+    max-width: 50px;
+  }
+  #presentation {
     justify-content: center;
     align-items: center;
     text-align: center;
-}
+    flex-direction: column-reverse;
+    gap: 0;
+    margin-top: 80px;
+  }
+  #presentation img {
+    max-width: 200px;
+  }
+
+  #home-adresses #container-articles,#reseaux .container-images{
+    flex-direction: column;
+  }
+
+    #home-adresses #container-articles{
+    gap: 20px;
+  }
+
+  #savoir{
+    text-align: center;
+  }
+  .containerContact{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+  }
+
+  #contact{
+    width: 80%;
+    margin: 20px auto;
+  }
 
 
-/*contact */
-.containerContact{
-  display: flex;
-  justify-content: space-between;
-}
+  #contact .body br{
+    margin-bottom: 10px;
+  }
 
-.containerContact #container-articles{
-  flex-direction: column;
-}
+  #map{
+    margin: auto;
+    width: 75% !important;
+  }
 
-.containerMap{
-  width: 50%;
+  footer{
+    justify-content: center;
+  }
 }

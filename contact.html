@@ -48,21 +48,21 @@
       <section id="adresses">
         <h2 class="title1">Nos adresses</h2>
         <div id="container-articles">
-          <article onclick="selectRestaurant(restaurants[0])">
+          <article class="resto1" onclick="selectRestaurant(restaurants[0])">
             <h3 class="highlight">Yummy Noodle</h3>
             <p class="body">
               185 rue de Lancry <br />
               75010 Paris
             </p>
           </article>
-          <article onclick="selectRestaurant(restaurants[1])">
+          <article class="resto2" onclick="selectRestaurant(restaurants[1])">
             <h3 class="highlight">Yummy Noodle</h3>
             <p class="body">
               185 rue de Lancry <br />
               75010 Paris
             </p>
           </article>
-          <article onclick="selectRestaurant(restaurants[2])">
+          <article class="resto3" onclick="selectRestaurant(restaurants[2])">
             <h3 class="highlight">Yummy Noodle</h3>
             <p class="body">
               185 rue de Lancry <br />
@@ -79,7 +79,7 @@
         <section id="contact">
         <h2 class="title1">Contactez-nous</h2>
         <p class="body">
-          Vous souhaitez nous poser une question, nous faire un feeback, ou tout simplement nous contacter ? <br>
+          Vous souhaitez nous poser une question, nous faire un feeback, ou tout simplement nous contacter ? <br> <br>
           Ecrivez-nous à <span><a href="mailto:yummy@noodles.fr">yummy@noodles.fr</a></span> ou appelez nous au <span><a href="tel:0113862342"> 01 13 86 23 42</a></span>
         </p>
       </section>
@@ -111,23 +111,23 @@
 
     const redIcon = L.icon({
       iconUrl: '/images/marker-red.png',
-      iconSize:     [70 / 2, 95 / 2], // size of the icon
+      iconSize:     [50 / 2, 60 / 2], // size of the icon
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
     const blueIcon = L.icon({
       iconUrl: '/images/marker-blue.png',
-      iconSize:     [70 / 2, 95 / 2], // size of the icon
+      iconSize:     [50 / 2, 60 / 2], // size of the icon
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
     // Tableau de restaurants avec leurs coordonnées géographiques
     const restaurants = [
-      { label: "Restaurant 1", coordinates: [48.8706784, 2.3613014] },
-      { label: "Restaurant 2", coordinates: [48.8541245, 2.328278] },
-      { label: "Restaurant 3", coordinates: [48.8650042, 2.3545866] },
+      { label: "Yummy noodle", coordinates: [48.8706784, 2.3613014] },
+      { label: "Yu Noodle My", coordinates: [48.8541245, 2.328278] },
+      { label: "Les Yummy Nouilles", coordinates: [48.8650042, 2.3545866] },
     ]
 
     const markers = restaurants.map((restaurant) => {
@@ -142,7 +142,7 @@
         marker.setIcon(blueIcon)
       })
       const {marker} = markers.find((marker) => marker.restaurant.label === restaurant.label)
-      marker.bindPopup(`Je suis ${restaurant.label}`).openPopup();
+      marker.bindPopup(`${restaurant.label}`).openPopup();
       marker.setIcon(redIcon)
       map.panTo(new L.LatLng(restaurant.coordinates[0], restaurant.coordinates[1]));
     }

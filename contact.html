@@ -19,8 +19,8 @@
     <!-- Définition du style pour la carte -->
     <style>
       #map {
-        height: 580px;
-        width: 616px;
+        width: 50%;
+        height: 500px;
       }
     </style>
     <!-- Titre de la page -->
@@ -30,12 +30,12 @@
     <!-- En-tête de la page -->
     <header>
       <!-- Lien vers la page d'accueil -->
-      <a href="accueil.html">
+      <a href="index.html">
         <img src="./images/LogoS.png" alt="" />
       </a>
       <!-- Menu de navigation -->
       <nav>
-        <a href="accueil.html">Accueil</a>
+        <a href="index.html">Accueil</a>
         <a href="menu.html">Menu</a>
         <a href="contact.html">Contact</a>
       </nav>
@@ -48,24 +48,21 @@
       <section id="adresses">
         <h2 class="title1">Nos adresses</h2>
         <div id="container-articles">
-          <article>
-            <img src="./images/accueil/facade1.png" alt="" />
+          <article onclick="selectRestaurant(restaurants[0])">
             <h3 class="highlight">Yummy Noodle</h3>
             <p class="body">
               185 rue de Lancry <br />
               75010 Paris
             </p>
           </article>
-          <article>
-            <img src="./images/accueil/facade2.png" alt="" />
+          <article onclick="selectRestaurant(restaurants[1])">
             <h3 class="highlight">Yummy Noodle</h3>
             <p class="body">
               185 rue de Lancry <br />
               75010 Paris
             </p>
           </article>
-          <article>
-            <img src="./images/accueil/facade3.png" alt="" />
+          <article onclick="selectRestaurant(restaurants[2])">
             <h3 class="highlight">Yummy Noodle</h3>
             <p class="body">
               185 rue de Lancry <br />
@@ -76,9 +73,7 @@
       </section>
 
       <!-- Conteneur pour afficher la carte -->
-      <div id="containerMap">
       <div id="map"></div>        
-      </div>
 
     </div>
         <section id="contact">
@@ -114,16 +109,42 @@
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
 
+    const redIcon = L.icon({
+      iconUrl: '/images/marker-red.png',
+      iconSize:     [70 / 2, 95 / 2], // size of the icon
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    const blueIcon = L.icon({
+      iconUrl: '/images/marker-blue.png',
+      iconSize:     [70 / 2, 95 / 2], // size of the icon
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
     // Tableau de restaurants avec leurs coordonnées géographiques
-    [
+    const restaurants = [
       { label: "Restaurant 1", coordinates: [48.8706784, 2.3613014] },
       { label: "Restaurant 2", coordinates: [48.8541245, 2.328278] },
       { label: "Restaurant 3", coordinates: [48.8650042, 2.3545866] },
-    ].forEach((restaurant) => {
+    ]
+
+    const markers = restaurants.map((restaurant) => {
       // Ajout d'un marqueur pour chaque restaurant sur la carte
-      const marker = L.marker(restaurant.coordinates).addTo(map);
-      // Ajout d'une fenêtre contextuelle (popup) pour afficher le label du restaurant
-      marker.bindPopup(`Je suis ${restaurant.label}`).openPopup();
+      const marker = L.marker(restaurant.coordinates, {icon: blueIcon}).addTo(map);
+      return {restaurant, marker}
     });
+
+    function selectRestaurant(restaurant) {
+      markers.forEach(({marker}) => {
+        marker.setIcon(blueIcon)
+        marker.setIcon(blueIcon)
+      })
+      const {marker} = markers.find((marker) => marker.restaurant.label === restaurant.label)
+      marker.bindPopup(`Je suis ${restaurant.label}`).openPopup();
+      marker.setIcon(redIcon)
+      map.panTo(new L.LatLng(restaurant.coordinates[0], restaurant.coordinates[1]));
+    }
   </script>
 </html>

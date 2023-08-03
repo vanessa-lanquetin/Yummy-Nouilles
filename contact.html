@@ -40,6 +40,7 @@
         <a href="contact.html">Contact</a>
       </nav>
     </header>
+
     <section id="banniere">
       <p class="highlight">Commandez maintenant !</p>
       <button class="title1">Click & Collect</button>
@@ -48,109 +49,144 @@
       <section id="adresses">
         <div id="container-articles">
           <h2 class="title1">Nos adresses</h2>
-          <article class="restos resto1" onclick="selectRestaurant(restaurants[0])">
+          <article
+            class="restos resto1"
+            onclick="selectRestaurant(restaurants[0]); addSelectedClass(this.querySelector('.body'));"
+          >
             <div class="body">
               <h3 class="highlight">Yummy Noodle</h3>
               <div>185 rue de Lancry</div>
               <div>75010 Paris</div>
               <div>+331 44 33 55 22</div>
-              <div>Lundi à Dimanche - 12h à 23h</div>              
+              <div>Lundi à Dimanche - 12h à 23h</div>
             </div>
           </article>
-          <article class="restos resto2" onclick="selectRestaurant(restaurants[1])">
+          <article
+            class="restos resto2"
+            onclick="selectRestaurant(restaurants[1]); addSelectedClass(this.querySelector('.body'));"
+          >
             <div class="body">
               <h3 class="highlight">Yu Noodle My</h3>
               <div>350 rue Saint-Guillaume</div>
               <div>75007 Paris</div>
               <div>+331 44 33 55 22</div>
-              <div>Lundi à Dimanche - 12h à 22h</div>            
+              <div>Lundi à Dimanche - 12h à 22h</div>
             </div>
           </article>
-          <article class="restos resto3" onclick="selectRestaurant(restaurants[2])">
+          <article
+            class="restos resto3"
+            onclick="selectRestaurant(restaurants[2]); addSelectedClass(this.querySelector('.body'));"
+          >
             <div class="body">
               <h3 class="highlight">Les Yummy Nouilles</h3>
               <div>208 rue au Maire</div>
               <div>75003 Paris</div>
               <div>+331 44 33 55 22</div>
               <div>Lundi à Dimanche - 12h à 23h</div>
-            </div>.
+            </div>
+            .
           </article>
         </div>
       </section>
 
       <!-- Conteneur pour afficher la carte -->
-      <div id="map"></div>        
-
+      <div id="map"></div>
     </div>
-        <section id="contact">
-        <h2 class="title1">Contactez-nous</h2>
-        <p class="body">
-          Vous souhaitez nous poser une question, nous faire un feeback, ou tout simplement nous contacter ? <br> <br>
-          Ecrivez-nous à <span><a href="mailto:yummy@noodles.fr">yummy@noodles.fr</a></span> ou appelez nous au <span><a href="tel:0113862342"> 01 13 86 23 42</a></span>
-        </p>
-      </section>
-    </main>
+    <section id="contact">
+      <h2 class="title1">Contactez-nous</h2>
+      <p class="body">
+        Vous souhaitez nous poser une question, nous faire un feeback, ou tout
+        simplement nous contacter ? <br />
+        <br />
+        Ecrivez-nous à
+        <span><a href="mailto:yummy@noodles.fr">yummy@noodles.fr</a></span> ou
+        appelez nous au
+        <span><a href="tel:0113862342"> 01 13 86 23 42</a></span>
+      </p>
+    </section>
+
     <footer>
       <i class="fab fa-instagram-square"></i>
       <i class="fab fa-facebook-square"></i>
       <i class="fas fa-map-marker-alt"></i>
     </footer>
+
+    <!-- Inclusion du script de Leaflet -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+
+    <!-- Script JavaScript pour afficher la carte et les marqueurs -->
+    <script>
+      // Création d'une instance de la carte avec Leaflet
+      const map = L.map("map").setView([48.8650042, 2.3545866], 13);
+
+      // Ajout d'une couche de tuiles OpenStreetMap à la carte
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+
+      const redIcon = L.icon({
+        iconUrl: "./images/marker-red.png",
+        iconSize: [50 / 2, 60 / 2], // size of the icon
+        iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62], // the same for the shadow
+        popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
+      });
+      const blueIcon = L.icon({
+        iconUrl: "./images/marker-blue.png",
+        iconSize: [50 / 2, 60 / 2], // size of the icon
+        iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62], // the same for the shadow
+        popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
+      });
+      // Tableau de restaurants avec leurs coordonnées géographiques
+      const restaurants = [
+        { label: "Yummy noodle", coordinates: [48.8706784, 2.3613014] },
+        { label: "Yu Noodle My", coordinates: [48.8541245, 2.328278] },
+        { label: "Les Yummy Nouilles", coordinates: [48.8650042, 2.3545866] },
+      ];
+
+      const markers = restaurants.map((restaurant) => {
+        // Ajout d'un marqueur pour chaque restaurant sur la carte
+        const marker = L.marker(restaurant.coordinates, {
+          icon: blueIcon,
+        }).addTo(map);
+        return { restaurant, marker };
+      });
+
+      function selectRestaurant(restaurant) {
+        markers.forEach(({ marker }) => {
+          marker.setIcon(blueIcon);
+          marker.setIcon(blueIcon);
+        });
+        const { marker } = markers.find(
+          (marker) => marker.restaurant.label === restaurant.label
+        );
+        marker.bindPopup(`${restaurant.label}`).openPopup();
+        marker.setIcon(redIcon);
+        map.panTo(
+          new L.LatLng(restaurant.coordinates[0], restaurant.coordinates[1])
+        );
+      }
+
+      function addSelectedClass(element) {
+        // Vérifie si l'élément n'a pas déjà la classe .selected
+        if (!element.classList.contains("selected")) {
+          // Supprime la classe .selected de tous les éléments .body
+          const bodyElements = document.querySelectorAll(".body");
+          bodyElements.forEach((bodyElement) => {
+            bodyElement.classList.remove("selected");
+          });
+
+          // Ajoute la classe .selected à l'élément .body du parent de l'élément cliqué
+          element.classList.add("selected");
+        }
+      }
+    </script>
   </body>
-  <!-- Inclusion du script de Leaflet -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-    crossorigin=""
-  ></script>
-
-  <!-- Script JavaScript pour afficher la carte et les marqueurs -->
-  <script>
-    // Création d'une instance de la carte avec Leaflet
-    const map = L.map("map").setView([48.8650042, 2.3545866], 13);
-
-    // Ajout d'une couche de tuiles OpenStreetMap à la carte
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(map);
-
-    const redIcon = L.icon({
-      iconUrl: './images/marker-red.png',
-      iconSize:     [50 / 2, 60 / 2], // size of the icon
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62],  // the same for the shadow
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-    });
-    const blueIcon = L.icon({
-      iconUrl: './images/marker-blue.png',
-      iconSize:     [50 / 2, 60 / 2], // size of the icon
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62],  // the same for the shadow
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-    });
-    // Tableau de restaurants avec leurs coordonnées géographiques
-    const restaurants = [
-      { label: "Yummy noodle", coordinates: [48.8706784, 2.3613014] },
-      { label: "Yu Noodle My", coordinates: [48.8541245, 2.328278] },
-      { label: "Les Yummy Nouilles", coordinates: [48.8650042, 2.3545866] },
-    ]
-
-    const markers = restaurants.map((restaurant) => {
-      // Ajout d'un marqueur pour chaque restaurant sur la carte
-      const marker = L.marker(restaurant.coordinates, {icon: blueIcon}).addTo(map);
-      return {restaurant, marker}
-    });
-
-    function selectRestaurant(restaurant) {
-      markers.forEach(({marker}) => {
-        marker.setIcon(blueIcon)
-        marker.setIcon(blueIcon)
-      })
-      const {marker} = markers.find((marker) => marker.restaurant.label === restaurant.label)
-      marker.bindPopup(`${restaurant.label}`).openPopup();
-      marker.setIcon(redIcon)
-      map.panTo(new L.LatLng(restaurant.coordinates[0], restaurant.coordinates[1]));
-    }
-  </script>
 </html>

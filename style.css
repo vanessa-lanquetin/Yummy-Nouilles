@@ -85,6 +85,7 @@ main {
   display: flex;
   gap: 50px;
   flex-wrap: wrap;
+  padding: 0 10px;
 }
 #presentation_left {
   padding-top: 20px;
